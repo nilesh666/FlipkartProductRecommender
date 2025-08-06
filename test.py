@@ -1,14 +1,10 @@
-from utils.logger import logging
-from utils.custom_exception import CustomException
-import sys
+from huggingface_hub import InferenceClient
+from src.config import Config
 
-def d(a,b):
-    try:
-        logging.info("Division started")
-        r = a/b
-        return r
-    except Exception as e:
-        raise CustomException(e, sys)
+client = InferenceClient(
+    model="BAAI/bge-base-en-v1.5",
+    token="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"
+)
 
-if __name__=="__main__":
-    d(10,0)
+response = client.feature_extraction("test sentence")
+print(response)

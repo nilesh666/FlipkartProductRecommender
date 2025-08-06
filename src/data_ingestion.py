@@ -40,7 +40,4 @@ class DataIngest():
             CustomException(e, sys)
 
 
-if __name__=="__main__":
-    a = DataIngest()
-    a.ingest(load_existing=False)
 

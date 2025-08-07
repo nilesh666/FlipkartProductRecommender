@@ -39,7 +39,7 @@ class RAGChain:
         )
 
         qa_chain = create_stuff_documents_chain(
-            self.llm, qa_chain
+            self.llm, qa_prompt
         )
 
         rag_chain = create_retrieval_chain(

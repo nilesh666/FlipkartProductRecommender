@@ -11,12 +11,12 @@ class RAGChain:
     def __init__(self, vstore):
         self.vstore = vstore
         self.llm = ChatGroq(model=Config.RAG_MODEL, temperature=0.5)
-        self.history = {}
+        self.history_store = {}
 
     def _get_history(self, session_id)->BaseChatMessageHistory:
-        if session_id not in self.history:
-            self.history[session_id]=ChatMessageHistory
-        return self.history
+        if session_id not in self.history_store:
+            self.history_store[session_id]=ChatMessageHistory()
+        return self.history_store[session_id]
     
     def build_chain(self):
         retriever = self.vstore.as_retriever(search_kwargs={"k":5})
@@ -29,7 +29,7 @@ class RAGChain:
 
         qa_prompt = ChatPromptTemplate.from_messages([
             ("system", """You're an e-commerce bot answering product-related queries using reviews and titles.
-                          Stick to context. Be concise and helpful.\n\nCONTEXT:\n{context}\n\nQUESTION: {input}"""),
+                          Stick to context. Be concise and helpful.Provide the answers in neat bullet points and easy to read. if possible highlight the product names for easy reading\n\nCONTEXT:\n{context}\n\nQUESTION: {input}"""),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}") 
         ])

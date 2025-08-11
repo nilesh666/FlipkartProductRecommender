@@ -28,8 +28,9 @@ class RAGChain:
         ])
 
         qa_prompt = ChatPromptTemplate.from_messages([
-            ("system", """You're an e-commerce bot answering product-related queries using reviews and titles.
-                          Stick to context. Be concise and helpful.Provide the answers in neat bullet points and easy to read. if possible highlight the product names for easy reading\n\nCONTEXT:\n{context}\n\nQUESTION: {input}"""),
+            ("system", """You are an e-commerce assistant that answers product-related questions based on reviews and titles. Stay strictly within the given context. Be concise, helpful, and present answers in clear bullet points. Highlight product names for readability.
+                CONTEXT: {context}
+                QUESTION: {input}"""),
             MessagesPlaceholder(variable_name="chat_history"),
             ("human", "{input}") 
         ])

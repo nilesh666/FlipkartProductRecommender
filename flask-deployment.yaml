@@ -9,20 +9,20 @@ spec:
   selector:
     matchlabels:
       app: flask
-template:
-  metadata: 
-    labels:
-      app: flask
-  spec:
-    containers:
-    - name: flask-container
-      image: flask-app:latest
-      imagePullPolicy: IfNotPresent
-      ports:
-        - containerPort: 5000
-      envFrom:
-        - secretRef:
-            name: llmops-secrets
+  template:
+    metadata: 
+      labels:
+        app: flask
+    spec:
+      containers:
+      - name: flask-container
+        image: flask-app:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 5000
+        envFrom:
+          - secretRef:
+              name: llmops-secrets
 ---
 apiVersion: v1
 kind: service

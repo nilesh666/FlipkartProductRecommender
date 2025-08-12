@@ -23,7 +23,7 @@ template:
       envFrom:
         - secretRef:
             name: llmops-secrets
-
+---
 apiVersion: v1
 kind: service
 metadata: 

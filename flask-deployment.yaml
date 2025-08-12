@@ -4,7 +4,7 @@ metadata:
   name: flask-app
   labels:
     app: flask
-sepc:
+spec:
   replicas: 1
   selector:
     matchlabels:
